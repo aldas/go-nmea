@@ -25,8 +25,8 @@ type VWT struct {
 }
 
 // newVWT constructor
-func newVWT(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVWT(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeVWT)
 	return VWT{
 		BaseSentence:     s,

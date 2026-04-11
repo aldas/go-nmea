@@ -20,8 +20,8 @@ type HSC struct {
 }
 
 // newHSC constructor
-func newHSC(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newHSC(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeHSC)
 	return HSC{
 		BaseSentence:        s,

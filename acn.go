@@ -40,8 +40,8 @@ type ACN struct {
 }
 
 // newACN constructor
-func newACN(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newACN(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeACN)
 	return ACN{
 		BaseSentence:             s,

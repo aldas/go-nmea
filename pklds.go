@@ -32,8 +32,8 @@ type PKLDS struct {
 }
 
 // newPKLDS constructor
-func newPKLDS(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPKLDS(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePKLDS)
 	m := PKLDS{
 		BaseSentence:    s,

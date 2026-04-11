@@ -21,8 +21,8 @@ type HBT struct {
 }
 
 // newHBT constructor
-func newHBT(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newHBT(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeHBT)
 	m := HBT{
 		BaseSentence:    s,

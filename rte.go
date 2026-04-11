@@ -27,8 +27,8 @@ type RTE struct {
 }
 
 // newRTE constructor
-func newRTE(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newRTE(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeRTE)
 	return RTE{
 		BaseSentence:              s,

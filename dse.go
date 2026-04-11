@@ -48,8 +48,8 @@ type DSEDataSet struct {
 }
 
 // newDSE constructor
-func newDSE(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newDSE(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeDSE)
 	dse := DSE{
 		BaseSentence:    s,

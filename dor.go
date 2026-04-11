@@ -79,8 +79,8 @@ type DOR struct {
 }
 
 // newDOR constructor
-func newDOR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newDOR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeDOR)
 	return DOR{
 		BaseSentence:       s,

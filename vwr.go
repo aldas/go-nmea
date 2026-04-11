@@ -12,8 +12,9 @@ const (
 //
 // Format: $--VWR,x.x,a,x.x,N,x.x,M,x.x,K*hh<CR><LF>
 // Example: $IIVWR,75,R,1.0,N,0.51,M,1.85,K*6C
-// 			$IIVWR,024,L,018,N,,,,*5e
-//			$IIVWR,,,,,,,,*53
+//
+//	$IIVWR,024,L,018,N,,,,*5e
+//	$IIVWR,,,,,,,,*53
 type VWR struct {
 	BaseSentence
 	MeasuredAngle        float64 // Measured Wind direction magnitude in degrees (0 to 180 deg)
@@ -27,8 +28,8 @@ type VWR struct {
 }
 
 // newVWR constructor
-func newVWR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVWR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeVWR)
 	return VWR{
 		BaseSentence:         s,

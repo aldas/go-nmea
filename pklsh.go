@@ -23,8 +23,8 @@ type PKLSH struct {
 }
 
 // newPKLSH constructor
-func newPKLSH(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPKLSH(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePKLSH)
 
 	return PKLSH{

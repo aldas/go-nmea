@@ -51,8 +51,8 @@ type ALA struct {
 }
 
 // newALA constructor
-func newALA(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newALA(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeALA)
 	return ALA{
 		BaseSentence:       s,

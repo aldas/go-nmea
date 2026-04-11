@@ -25,8 +25,8 @@ type RPM struct {
 }
 
 // newRPM constructor
-func newRPM(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newRPM(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeRPM)
 	return RPM{
 		BaseSentence: s,

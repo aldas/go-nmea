@@ -38,8 +38,8 @@ type BBM struct {
 }
 
 // newBBM constructor
-func newBBM(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newBBM(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeBBM)
 	m := BBM{
 		BaseSentence:     s,

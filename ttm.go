@@ -32,8 +32,8 @@ type TTM struct {
 }
 
 // newTTM constructor
-func newTTM(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newTTM(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeTTM)
 	return TTM{
 		BaseSentence:      s,

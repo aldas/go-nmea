@@ -19,8 +19,8 @@ type WPL struct {
 }
 
 // newWPL constructor
-func newWPL(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newWPL(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeWPL)
 	return WPL{
 		BaseSentence: s,

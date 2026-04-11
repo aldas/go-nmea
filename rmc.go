@@ -17,8 +17,9 @@ const (
 // Format NMEA 2.3: $--RMC,hhmmss.ss,A,ddmm.mm,a,dddmm.mm,a,x.x,x.x,xxxx,x.x,a,m*hh<CR><LF>
 // Format NMEA 4.1: $--RMC,hhmmss.ss,A,ddmm.mm,a,dddmm.mm,a,x.x,x.x,xxxx,x.x,a,m,s*hh<CR><LF>
 // Example: $GNRMC,220516,A,5133.82,N,00042.24,W,173.8,231.8,130694,004.2,W*6E
-//          $GNRMC,142754.0,A,4302.539570,N,07920.379823,W,0.0,,070617,0.0,E,A*21
-//          $GNRMC,102014.00,A,5550.6082,N,03732.2488,E,000.00000,092.9,300518,,,A,V*3B
+//
+//	$GNRMC,142754.0,A,4302.539570,N,07920.379823,W,0.0,,070617,0.0,E,A*21
+//	$GNRMC,102014.00,A,5550.6082,N,03732.2488,E,000.00000,092.9,300518,,,A,V*3B
 type RMC struct {
 	BaseSentence
 	Time      Time    // Time Stamp
@@ -34,8 +35,8 @@ type RMC struct {
 }
 
 // newRMC constructor
-func newRMC(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newRMC(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeRMC)
 	m := RMC{
 		BaseSentence: s,

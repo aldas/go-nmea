@@ -83,8 +83,8 @@ type MDA struct {
 	MetersValid           bool // M
 }
 
-func newMDA(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newMDA(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeMDA)
 	return MDA{
 		BaseSentence:          s,

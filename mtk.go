@@ -33,8 +33,8 @@ type MTK struct {
 
 // newMTK constructor
 // Deprecated: use newPMTK001 instead
-func newMTK(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newMTK(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeMTK)
 	cmd := p.Int64(0, "command")
 	flag := p.Int64(1, "flag")

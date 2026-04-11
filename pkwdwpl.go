@@ -25,8 +25,8 @@ type PKWDWPL struct {
 }
 
 // newPKWDWPL constructor
-func newPKWDWPL(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPKWDWPL(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePKWDWPL)
 	m := PKWDWPL{
 		BaseSentence: s,

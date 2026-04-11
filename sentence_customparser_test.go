@@ -77,8 +77,7 @@ var customparsetests = []struct {
 	},
 }
 
-func init() {
-
+func initParsers() {
 	// Register some custom parsers
 	MustRegisterParser("YYY", func(s BaseSentence) (Sentence, error) {
 		// Somewhat error prone parser without deps
@@ -113,6 +112,7 @@ func init() {
 }
 
 func TestCustomParser(t *testing.T) {
+	initParsers()
 	for _, tt := range customparsetests {
 		t.Run(tt.name, func(t *testing.T) {
 			m, err := Parse(tt.raw)

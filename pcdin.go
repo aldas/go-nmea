@@ -27,8 +27,8 @@ type PCDIN struct {
 }
 
 // newPCDIN constructor
-func newPCDIN(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPCDIN(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePCDIN)
 
 	if len(p.Fields) != 4 {

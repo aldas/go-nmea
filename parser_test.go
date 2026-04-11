@@ -231,7 +231,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{""},
 			expected: int64(math.MaxInt64),
 			parse: func(p *Parser) interface{} {
-				p.MaxInt64ForEmptyInt = true
+				p.config.MaxInt64ForEmptyInt = true
 				return p.Int64(0, "context")
 			},
 		},
@@ -240,7 +240,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{""},
 			expected: Int64{Value: math.MaxInt64, Valid: false},
 			parse: func(p *Parser) interface{} {
-				p.MaxInt64ForEmptyInt = true
+				p.config.MaxInt64ForEmptyInt = true
 				return p.NullInt64(0, "context")
 			},
 		},
@@ -249,7 +249,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{"456"},
 			expected: Int64{Value: 456, Valid: true},
 			parse: func(p *Parser) interface{} {
-				p.MaxInt64ForEmptyInt = true
+				p.config.MaxInt64ForEmptyInt = true
 				return p.NullInt64(0, "context")
 			},
 		},
@@ -258,7 +258,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{"0"},
 			expected: Int64{Value: 0, Valid: true},
 			parse: func(p *Parser) interface{} {
-				p.MaxInt64ForEmptyInt = true
+				p.config.MaxInt64ForEmptyInt = true
 				return p.NullInt64(0, "context")
 			},
 		},
@@ -407,7 +407,7 @@ func TestParser(t *testing.T) {
 			name:   "Float64 empty field is NaN when NaNForEmptyFloat is set",
 			fields: []string{""},
 			parse: func(p *Parser) interface{} {
-				p.NaNForEmptyFloat = true
+				p.config.NaNForEmptyFloat = true
 				v := p.Float64(0, "context")
 				assert.True(t, math.IsNaN(v))
 				return nil
@@ -417,7 +417,7 @@ func TestParser(t *testing.T) {
 			name:   "NullFloat64 empty field returns NaN when NaNForEmptyFloat is set",
 			fields: []string{""},
 			parse: func(p *Parser) interface{} {
-				p.NaNForEmptyFloat = true
+				p.config.NaNForEmptyFloat = true
 				v := p.NullFloat64(0, "context")
 				assert.True(t, math.IsNaN(v.Value))
 				assert.False(t, v.Valid)
@@ -429,7 +429,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{"123.456"},
 			expected: Float64{Value: 123.456, Valid: true},
 			parse: func(p *Parser) interface{} {
-				p.NaNForEmptyFloat = true
+				p.config.NaNForEmptyFloat = true
 				return p.NullFloat64(0, "context")
 			},
 		},
@@ -438,7 +438,7 @@ func TestParser(t *testing.T) {
 			fields:   []string{"0"},
 			expected: Float64{Value: 0, Valid: true},
 			parse: func(p *Parser) interface{} {
-				p.NaNForEmptyFloat = true
+				p.config.NaNForEmptyFloat = true
 				return p.NullFloat64(0, "context")
 			},
 		},

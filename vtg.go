@@ -12,7 +12,8 @@ const (
 // Format:             $--VTG,x.x,T,x.x,M,x.x,N,x.x,K*hh<CR><LF>
 // Format (NMEA 2.3+): $--VTG,x.x,T,x.x,M,x.x,N,x.x,K,m*hh<CR><LF>
 // Example: $GPVTG,45.5,T,67.5,M,30.45,N,56.40,K*4B
-//          $GPVTG,220.86,T,,M,2.550,N,4.724,K,A*34
+//
+//	$GPVTG,220.86,T,,M,2.550,N,4.724,K,A*34
 type VTG struct {
 	BaseSentence
 	TrueTrack        float64
@@ -24,8 +25,8 @@ type VTG struct {
 
 // newVTG parses the VTG sentence into this struct.
 // e.g: $GPVTG,360.0,T,348.7,M,000.0,N,000.0,K*43
-func newVTG(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVTG(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeVTG)
 	vtg := VTG{
 		BaseSentence:     s,

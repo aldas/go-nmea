@@ -6,47 +6,43 @@ import (
 	"strconv"
 )
 
-// ParserOption is a functional option for configuring a Parser.
-type ParserOption func(*Parser)
-
-// WithNaNForEmptyFloat configures the parser to return math.NaN() for empty float64 fields
-// instead of 0. NullFloat64 will return Float64{Value: math.NaN(), Valid: false} for empty fields.
-func WithNaNForEmptyFloat(enabled bool) ParserOption {
-	return func(p *Parser) {
-		p.NaNForEmptyFloat = enabled
-	}
-}
-
-// WithMaxInt64ForEmptyInt configures the parser to return math.MaxInt64 for empty int64 fields
-// instead of 0. NullInt64 will return Int64{Value: math.MaxInt64, Valid: false} for empty fields.
-func WithMaxInt64ForEmptyInt(enabled bool) ParserOption {
-	return func(p *Parser) {
-		p.MaxInt64ForEmptyInt = enabled
-	}
-}
-
 // Parser provides a simple way of accessing and parsing
 // sentence fields
 type Parser struct {
 	BaseSentence
 	err error
 
-	// NaNForEmptyFloat when true causes NullFloat64/Float64 to return math.NaN() for empty fields
-	// instead of 0. This allows distinguishing between empty/missing fields and fields with value 0.0.
+	config ParserConfig
+}
+
+// ParserConfig configures the parser.
+type ParserConfig struct {
+	// NaNForEmptyFloat when set to true makes the parser return math.NaN() as the value
+	// for empty float64 fields instead of 0. This allows distinguishing between a field
+	// that is empty/missing (NaN) and a field that has value 0.0.
+	// NullFloat64 will return Float64{Value: math.NaN(), Valid: false} for empty fields.
+	// Float64 (which returns NullFloat64.Value) will return math.NaN() for empty fields.
 	NaNForEmptyFloat bool
 
-	// MaxInt64ForEmptyInt when true causes NullInt64/Int64 to return math.MaxInt64 for empty fields
-	// instead of 0. This allows distinguishing between empty/missing fields and fields with value 0.
+	// MaxInt64ForEmptyInt when set to true makes the parser return math.MaxInt64 as the value
+	// for empty int64 fields instead of 0. This allows distinguishing between a field
+	// that is empty/missing (MaxInt64) and a field that has value 0.
+	// NullInt64 will return Int64{Value: math.MaxInt64, Valid: false} for empty fields.
+	// Int64 (which returns NullInt64.Value) will return math.MaxInt64 for empty fields.
 	MaxInt64ForEmptyInt bool
 }
 
-// NewParser constructor
-func NewParser(s BaseSentence, opts ...ParserOption) *Parser {
-	p := &Parser{BaseSentence: s}
-	for _, opt := range opts {
-		opt(p)
+// NewParserWithConfig creates a new parser with the given configuration.
+func NewParserWithConfig(s BaseSentence, config ParserConfig) *Parser {
+	return &Parser{
+		BaseSentence: s,
+		config:       config,
 	}
-	return p
+}
+
+// NewParser constructor
+func NewParser(s BaseSentence) *Parser {
+	return &Parser{BaseSentence: s}
 }
 
 // AssertType makes sure the sentence's type matches the provided one.
@@ -169,7 +165,7 @@ func (p *Parser) NullInt64(i int, context string) Int64 {
 		return Int64{}
 	}
 	if s == "" {
-		if p.MaxInt64ForEmptyInt {
+		if p.config.MaxInt64ForEmptyInt {
 			return Int64{Value: math.MaxInt64, Valid: false}
 		}
 		return Int64{}
@@ -198,7 +194,7 @@ func (p *Parser) NullFloat64(i int, context string) Float64 {
 		return Float64{}
 	}
 	if s == "" {
-		if p.NaNForEmptyFloat {
+		if p.config.NaNForEmptyFloat {
 			return Float64{Value: math.NaN(), Valid: false}
 		}
 		return Float64{}

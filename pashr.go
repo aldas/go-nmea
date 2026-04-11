@@ -71,8 +71,8 @@ type PASHR struct {
 }
 
 // newPASHR constructor
-func newPASHR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPASHR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePASHR)
 	return PASHR{
 		BaseSentence:       s,

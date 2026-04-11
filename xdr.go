@@ -48,7 +48,8 @@ const (
 //
 // Format: $--XDR,a,x.x,a,c--c, ..... *hh<CR><LF>
 // Example: $HCXDR,A,171,D,PITCH,A,-37,D,ROLL,G,367,,MAGX,G,2420,,MAGY,G,-8984,,MAGZ*41
-//			$SDXDR,C,23.15,C,WTHI*70
+//
+//	$SDXDR,C,23.15,C,WTHI*70
 type XDR struct {
 	BaseSentence
 	Measurements []XDRMeasurement
@@ -102,8 +103,8 @@ type XDRMeasurement struct {
 }
 
 // newXDR constructor
-func newXDR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newXDR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeXDR)
 
 	xdr := XDR{

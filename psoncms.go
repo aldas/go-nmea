@@ -10,7 +10,9 @@ const (
 // https://www.xsens.com/hubfs/Downloads/Manuals/MT_Low-Level_Documentation.pdf (page 37)
 //
 // Format: $PSONCMS,Q.QQQQ,P.PPPP,R.RRRR,S.SSSS,XX.XXXX,YY.YYYY,ZZ.ZZZZ,
-//			FF.FFFF,GG.GGGG,HH.HHHH,NN.NNNN,MM,MMMM,PP.PPPP,TT.T*hh<CR><LF>
+//
+//	FF.FFFF,GG.GGGG,HH.HHHH,NN.NNNN,MM,MMMM,PP.PPPP,TT.T*hh<CR><LF>
+//
 // Example: $PSONCMS,0.0905,0.4217,0.9020,-0.0196,-1.7685,0.3861,-9.6648,-0.0116,0.0065,-0.0080,0.0581,0.3846,0.7421,33.1*76
 type PSONCMS struct {
 	BaseSentence
@@ -31,8 +33,8 @@ type PSONCMS struct {
 }
 
 // newPSONCMS constructor
-func newPSONCMS(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPSONCMS(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePSONCMS)
 	m := PSONCMS{
 		BaseSentence:      s,

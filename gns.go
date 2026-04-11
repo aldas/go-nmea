@@ -33,7 +33,8 @@ const (
 //
 // Format: $--GNS,hhmmss.ss,ddmm.mm,a,dddmm.mm,a,c--c,xx,x.x,x.x,x.x,x.x,x.x*hh<CR><LF>
 // Example: $GNGNS,014035.00,4332.69262,S,17235.48549,E,RR,13,0.9,25.63,11.24,,*70
-//          $GPGNS,224749.00,3333.4268304,N,11153.3538273,W,D,19,0.6,406.110,-26.294,6.0,0138,S*6A
+//
+//	$GPGNS,224749.00,3333.4268304,N,11153.3538273,W,D,19,0.6,406.110,-26.294,6.0,0138,S*6A
 type GNS struct {
 	BaseSentence
 	Time      Time // UTC of position
@@ -59,8 +60,8 @@ type GNS struct {
 }
 
 // newGNS Constructor
-func newGNS(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newGNS(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeGNS)
 	m := GNS{
 		BaseSentence: s,

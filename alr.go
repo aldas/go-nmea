@@ -34,8 +34,8 @@ type ALR struct {
 }
 
 // newALR constructor
-func newALR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newALR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeALR)
 	return ALR{
 		BaseSentence:    s,

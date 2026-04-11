@@ -17,8 +17,8 @@ type Query struct {
 }
 
 // newQuery constructor
-func newQuery(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newQuery(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeQuery)
 
 	return Query{

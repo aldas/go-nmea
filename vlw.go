@@ -25,8 +25,8 @@ type VLW struct {
 }
 
 // newVLW constructor
-func newVLW(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVLW(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeVLW)
 
 	vlw := VLW{

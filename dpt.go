@@ -10,7 +10,8 @@ const (
 //
 // Format: $--DPT,x.x,x.x,x.x*hh<CR><LF>
 // Example: $SDDPT,0.5,0.5,*7B
-//          $INDPT,2.3,0.0*46
+//
+//	$INDPT,2.3,0.0*46
 type DPT struct {
 	BaseSentence
 	Depth      float64 // Water depth relative to transducer, meters
@@ -19,8 +20,8 @@ type DPT struct {
 }
 
 // newDPT constructor
-func newDPT(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newDPT(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeDPT)
 	dpt := DPT{
 		BaseSentence: s,

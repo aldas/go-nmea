@@ -22,8 +22,8 @@ type DBK struct {
 }
 
 // newDBK constructor
-func newDBK(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newDBK(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeDBK)
 	return DBK{
 		BaseSentence:     s,

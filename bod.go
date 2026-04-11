@@ -12,7 +12,8 @@ const (
 //
 // Format: $--BOD,x.x,T,x.x,M,c--c,c--c*hh<CR><LF>
 // Example: $GPBOD,099.3,T,105.6,M,POINTB*64
-//			$GPBOD,097.0,T,103.2,M,POINTB,POINTA*4A
+//
+//	$GPBOD,097.0,T,103.2,M,POINTB,POINTA*4A
 type BOD struct {
 	BaseSentence
 	BearingTrue           float64 // true bearing in degrees
@@ -24,8 +25,8 @@ type BOD struct {
 }
 
 // newBOD constructor
-func newBOD(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newBOD(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeBOD)
 	bod := BOD{
 		BaseSentence:          s,

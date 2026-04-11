@@ -19,8 +19,8 @@ type RSA struct {
 }
 
 // newRSA constructor
-func newRSA(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newRSA(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeRSA)
 	return RSA{
 		BaseSentence:               s,

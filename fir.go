@@ -84,8 +84,8 @@ type FIR struct {
 }
 
 // newFIR constructor
-func newFIR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newFIR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeFIR)
 	return FIR{
 		BaseSentence:              s,

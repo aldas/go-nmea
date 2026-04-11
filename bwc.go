@@ -12,7 +12,8 @@ const (
 // Format:             $--BWC,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh<CR><LF>
 // Format (NMEA 2.3+): $--BWC,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c,m*hh<CR><LF>
 // Example: $GPBWC,081837,,,,,,T,,M,,N,*13
-//          $GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21
+//
+//	$GPBWC,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*21
 type BWC struct {
 	BaseSentence
 	Time                      Time    // UTC Time
@@ -29,8 +30,8 @@ type BWC struct {
 }
 
 // newBWC constructor
-func newBWC(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newBWC(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeBWC)
 	bwc := BWC{
 		BaseSentence:              s,

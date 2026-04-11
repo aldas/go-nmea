@@ -31,8 +31,8 @@ type PKNDS struct {
 }
 
 // newPKNDS constructor
-func newPKNDS(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPKNDS(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePKNDS)
 	m := PKNDS{
 		BaseSentence:    s,

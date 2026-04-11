@@ -11,7 +11,8 @@ const (
 // Format:             $--BWR,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c*hh<CR><LF>
 // Format (NMEA 2.3+): $--BWR,hhmmss.ss,llll.ll,a,yyyyy.yy,a,x.x,T,x.x,M,x.x,N,c--c,m*hh<CR><LF>
 // Example: $GPBWR,081837,,,,,,T,,M,,N,*02
-//          $GPBWR,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*30
+//
+//	$GPBWR,220516,5130.02,N,00046.34,W,213.8,T,218.0,M,0004.6,N,EGLM*30
 type BWR struct {
 	BaseSentence
 	Time                      Time    // UTC Time
@@ -28,8 +29,8 @@ type BWR struct {
 }
 
 // newBWR constructor
-func newBWR(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newBWR(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeBWR)
 	bwc := BWR{
 		BaseSentence:              s,

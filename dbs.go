@@ -22,8 +22,8 @@ type DBS struct {
 }
 
 // newDBS constructor
-func newDBS(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newDBS(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeDBS)
 	return DBS{
 		BaseSentence:    s,

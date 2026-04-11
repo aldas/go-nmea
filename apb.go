@@ -35,7 +35,8 @@ const (
 // Format:           $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a*hh<CR><LF>
 // Format NMEA 2.3+: $--APB,A,A,x.x,a,N,A,A,x.x,a,c--c,x.x,a,x.x,a,a*hh<CR><LF>
 // Example: $GPAPB,A,A,0.10,R,N,V,V,011,M,DEST,011,M,011,M*82
-//			$ECAPB,A,A,0.0,L,M,V,V,175.2,T,Antechamber_Bay,175.2,T,175.2,T*48
+//
+//	$ECAPB,A,A,0.0,L,M,V,V,175.2,T,Antechamber_Bay,175.2,T,175.2,T*48
 type APB struct {
 	BaseSentence
 
@@ -104,8 +105,8 @@ type APB struct {
 }
 
 // newAPB constructor
-func newAPB(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newAPB(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeAPB)
 	apb := APB{
 		BaseSentence:               s,

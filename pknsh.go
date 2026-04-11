@@ -22,8 +22,8 @@ type PKNSH struct {
 }
 
 // newPKNSH constructor
-func newPKNSH(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPKNSH(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePKNSH)
 
 	return PKNSH{

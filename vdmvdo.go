@@ -24,8 +24,8 @@ type VDMVDO struct {
 }
 
 // newVDMVDO constructor
-func newVDMVDO(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVDMVDO(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	m := VDMVDO{
 		BaseSentence:   s,
 		NumFragments:   p.Int64(0, "number of fragments"),

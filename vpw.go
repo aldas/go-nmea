@@ -19,8 +19,8 @@ type VPW struct {
 }
 
 // newVPW constructor
-func newVPW(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newVPW(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeVPW)
 	return VPW{
 		BaseSentence:   s,

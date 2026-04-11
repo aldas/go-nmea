@@ -34,8 +34,8 @@ type PGRMT struct {
 }
 
 // newPGRMT constructor
-func newPGRMT(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newPGRMT(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypePGRMT)
 
 	return PGRMT{

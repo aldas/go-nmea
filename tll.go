@@ -30,8 +30,8 @@ type TLL struct {
 }
 
 // newTLL constructor
-func newTLL(s BaseSentence, opts ...ParserOption) (Sentence, error) {
-	p := NewParser(s, opts...)
+func newTLL(s BaseSentence, config ParserConfig) (Sentence, error) {
+	p := NewParserWithConfig(s, config)
 	p.AssertType(TypeTLL)
 	return TLL{
 		BaseSentence:    s,
